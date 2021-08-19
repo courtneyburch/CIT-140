@@ -53,10 +53,16 @@
         function getTotal(){
             // get item cost from item cost input box
             let item_cost = parseFloat(document.SalesTaxForm.item_cost.value);
+            // item cost must be a number
+            if(isNaN(item_cost)){alert("Please enter a number for the item cost");}
             // get quantity from input box
             let item_quantity = parseFloat(document.SalesTaxForm.quantity.value);
+            // item quantity must be a number
+            if(isNaN(quantity)){alert("Please enter a number for the item quantity");}
             // get sales tax rate from input box
             let tax_rate = parseFloat(document.SalesTaxForm.sales_tax_rate.value);
+            // tax rate must be a number
+            if(isNaN(tax_rate)){alert("Please enter a number for the tax rate");}
             // calculate total cost including tax
             let total_cost = (item_cost * item_quantity)*(1+ tax_rate / 100);
             // display total cost 
