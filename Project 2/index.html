@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Courtney Burch CIT 140 Project 2 August 19, 2021 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <!--Styles for form elements  -->
+    <style>
+        form{
+            display: block;
+            margin: 3rem;
+        }
+        .container{
+            margin: 1rem;
+        }
+    </style>
+
+    <script>
+        // tax calculator
+        function tax(){
+            // get income from user input
+            let userIncome = parseFloat(document.taxForm.income.value);
+            let taxAmount = 0;
+            
+            if(isNaN(userIncome)){
+                alert("Please enter a valid number without commas or dollar signs.");
+            } else if(userIncome < 27050){
+                taxAmount = userIncome * 0.15;
+            } else if(userIncome <65550){
+                taxAmount = 4057.50 + (userIncome - 27050) * 0.275;
+            } else if(userIncome <  136750){
+                taxAmount = 14654.00 + (userIncome - 65550) * .305;
+            } else if(userIncome < 297350){
+                36361.00 + (userIncome - 136750) * 0.355;
+            } else {
+                taxAmount = 93374 + (userIncome - 297350) * 0.391;
+            }
+            // only display the tax due if it is anumber
+            if(!isNaN(taxAmount)){
+                document.taxForm.taxDue.value = taxAmount.toFixed(2);}
+        }
+    </script>
+</head>
+
+<body>
+    <form action="" name=taxForm>
+        <div class="container">
+            <!-- user input of income -->
+            <input type="text" name="income" id="income">
+            <label for="income">Enter your income</label>
+        </div>
+
+        <div class="container">
+            <!-- button to calculate tax -->
+            <input type="button" value="Calculate Tax" onclick="tax()">
+        </div>
+        
+        <div class="container">
+            <!-- display tax due  -->
+            <input type="text" name="taxDue" id="taxDue">
+            <label for="taxDue">Tax to be Paid</label>
+        </div>
+    </form>
+</body>
+</html>
