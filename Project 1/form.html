@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- CIT 140 Project 1 Courtney Burch -->
+<!-- CIT 140 Project 1, Courtney Burch, August 18 2021 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <title>Sales Tax Calculator</title>
 </head>
 <style>
+    /* styles for form elements */
     form{
         margin: 3rem;
     }
@@ -15,28 +16,34 @@
         display: block;
         margin: 1rem;
     }
-
 </style>
+
 <body>
     <form action="" name="SalesTaxForm">
         <div class="container">
+            <!-- Item Cost entry -->
             <input type="text" name="item_cost" id="item_cost">
             <label for="item_cost">Enter Item Cost</label>
         </div>
         <div class="container">
+            <!-- Item Quantity Entry -->
             <input type="text" name="quantity" id="quantity">
             <label for="quantity">Enter Quantity Purchased</label>
         </div>  
         <div class="container">
+            <!-- Sales tax rate -->
             <input type="text" name="sales_tax_rate" id="sales_tax_rate">
             <label for="sales_tax_rate">Enter Sales Tax Rate</label>
         </div>  
         <div class="container">
+            <!-- Total button -->
             <input type="button" onclick="getTotal()" value="Click for Total">
             &nbsp;
+            <!-- Reset form button -->
             <input type="reset" id="reset" value="Reset Form" class="btn">
         </div>
         <div class="container">
+            <!-- display total -->
             <input type="text" name="total" id="total">
             <label for="total">Total Including Sales Tax</label>
         </div>
@@ -44,10 +51,15 @@
 
     <script>
         function getTotal(){
+            // get item cost from item cost input box
             let item_cost = parseFloat(document.SalesTaxForm.item_cost.value);
+            // get quantity from input box
             let item_quantity = parseFloat(document.SalesTaxForm.quantity.value);
+            // get sales tax rate from input box
             let tax_rate = parseFloat(document.SalesTaxForm.sales_tax_rate.value);
+            // calculate total cost including tax
             let total_cost = (item_cost * item_quantity)*(1+ tax_rate / 100);
+            // display total cost 
             document.SalesTaxForm.total.value = total_cost.toFixed(2);
         }
     </script>
