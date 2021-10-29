@@ -15,6 +15,10 @@
         .container{
             margin: 1rem;
         }
+
+        #warning{
+            color: red;
+        }
     </style>
 
     <script>
@@ -25,21 +29,31 @@
             let taxAmount = 0;
             
             if(isNaN(userIncome)){
-                alert("Please enter a valid number without commas or dollar signs.");
-            } else if(userIncome < 27050){
-                taxAmount = userIncome * 0.15;
-            } else if(userIncome <65550){
-                taxAmount = 4057.50 + (userIncome - 27050) * 0.275;
-            } else if(userIncome <  136750){
-                taxAmount = 14654.00 + (userIncome - 65550) * .305;
-            } else if(userIncome < 297350){
-                36361.00 + (userIncome - 136750) * 0.355;
-            } else {
-                taxAmount = 93374 + (userIncome - 297350) * 0.391;
+                document.getElementById("warning").innerHTML = "Please enter a valid number without commas or dollar signs.";
+                document.taxForm.income.value = "";
+                document.taxForm.taxDue.value = "";
+                return;
             }
-            // only display the tax due if it is anumber
-            if(!isNaN(taxAmount)){
-                document.taxForm.taxDue.value = taxAmount.toFixed(2);}
+
+            else if(!isNaN(userIncome)){
+                document.getElementById("warning").innerHTML = "";
+                
+                if(userIncome < 27050){
+                    taxAmount = userIncome * 0.15;
+                } else if(userIncome < 65550){
+                    taxAmount = 4057.50 + (userIncome - 27050) * 0.275;
+                } else if(userIncome <  136750){
+                    taxAmount = 14654.00 + (userIncome - 65550) * .305;
+                } else if(userIncome < 297350){
+                    taxAmount = 36361.00 + (userIncome - 136750) * 0.355;
+                } else {
+                    taxAmount = 93374 + (userIncome - 297350) * 0.391;
+                }
+                
+            }
+            document.taxForm.taxDue.value = taxAmount.toFixed(2);
+            return;
+                
         }
     </script>
 </head>
@@ -49,8 +63,10 @@
         <div class="container">
             <!-- user input of income -->
             <input type="text" name="income" id="income">
-            <label for="income">Enter your income</label>
+            <label for="income">Enter income</label>
         </div>
+
+        <div class="container" id="warning"> </div>
 
         <div class="container">
             <!-- button to calculate tax -->

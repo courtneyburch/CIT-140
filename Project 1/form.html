@@ -58,7 +58,7 @@
             // get quantity from input box
             let item_quantity = parseFloat(document.SalesTaxForm.quantity.value);
             // item quantity must be a number
-            if(isNaN(quantity)){alert("Please enter a number for the item quantity");}
+            if(isNaN(item_quantity)){alert("Please enter a number for the item quantity");}
             // get sales tax rate from input box
             let tax_rate = parseFloat(document.SalesTaxForm.sales_tax_rate.value);
             // tax rate must be a number
@@ -66,7 +66,7 @@
             // calculate total cost including tax
             let total_cost = (item_cost * item_quantity)*(1+ tax_rate / 100);
             // display total cost 
-            document.SalesTaxForm.total.value = total_cost.toFixed(2);
+            if(!isNaN(total_cost)){document.SalesTaxForm.total.value = total_cost.toFixed(2);}
         }
     </script>
 

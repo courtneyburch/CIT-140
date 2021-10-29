@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Table</title>
+<!-- Courtney Burch CIT 140 Project 3 Sept. 15 2021 -->
+    <style>
+        .hideButton{
+            display: none;
+        }
+        
+        
+        html{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        table{
+            border: 1px solid black;
+            text-align: center;
+            
+        }
+        table tr td{
+            border: 1px solid black;
+            padding: 5px;
+        }
+        tr:first-of-type{
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function displayTempTable(){
+            let degF = [-40, -12, 1, 15, 32, 45, 72, 90, 121];
+            let degC = [];
+                //create a variable to hold table information with table header info and opening table tag
+            let tableData = "<table>";
+            tableData += "<tr>"; 
+            tableData+= "<td>Fahrenheit Temperature</td>";
+            tableData+= "<td>Celsius Temperature</td>";
+            tableData+= "</tr>";
+            
+    //create Celsius temperature array
+            for(let i = 0; i < degF.length; i++){
+                degC[i] = ((degF[i] - 32) / 1.8).toFixed(1);
+                
+                //create a row for each temperature pair
+                //create a td for each temperature for a given value of i
+                tableData += "<tr>";
+                tableData += "<td>" + degF[i] + "</td>"; 
+                tableData += "<td>" + parseFloat(degC[i]) + "</td>"; //use ParseFloat to drop unnecessary trailing zeros
+                tableData += "</tr>";
+            }
+            //add closing table tag
+            tableData += "</table>";
+            //assign tableData to table element in the document
+            document.getElementById("tempTable").innerHTML = tableData;
+            //add the class to hide the button after it is clicked
+            document.getElementById("button").classList.add("hideButton");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Temperature Table</h1>
+    <button  id = "button" onclick=displayTempTable()>Display Temperature Table</button>
+    <div id="tempTable"></div>
+</body>
+</html>

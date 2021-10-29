@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Items</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+    .hideTable{
+        display: none;
+    }
+    .hideBtn{
+        display: none;
+    }
+</style>
+
+<script>
+     const items = [   		
+          {item: 'boogie board', cost: 15.99, quantity: 3},   		
+          {item: 'shark-tooth necklace', cost: 10.99, quantity: 1},   		
+          {item: 'inflatable alligator', cost: 12.99, quantity: 2},   		
+          {item: 'flip flops', cost: 16.99, quantity: 1},   		
+          {item: 'beach towel', cost: 10.99, quantity: 2},    		
+          {item: 'goggles', cost: 8.99, quantity: 2}   	
+       ]; 
+
+    window.onload = function(){
+        
+       document.getElementById('button').onclick = function(){
+            document.getElementById('tableVisibility').classList.remove('hideTable');
+   
+            let tbl = document.getElementById('dataTable');
+            let heading = tbl.insertRow(-1);
+            heading.style.fontWeight =  'bold';
+            heading.insertCell().innerHTML = "Item";
+            heading.insertCell().innerHTML = "Cost";
+            heading.insertCell().innerHTML = "Quantity";
+            heading.insertCell().innerHTML = "Subtotal";
+            heading.insertCell().innerHTML = "Grand Total";
+
+
+            let grandTotal = 0;
+        
+           for(let i=0; i<items.length; i++){
+            let subtotal = 0;
+            subtotal += items[i].cost * items[i].quantity;
+            grandTotal += subtotal;
+            let row = tbl.insertRow(-1);
+            row.insertCell().innerHTML = items[i].item;
+            row.insertCell().innerHTML = items[i].cost;
+            row.insertCell().innerHTML = items[i].quantity;
+            row.insertCell().innerHTML = subtotal;
+            row.insertCell().innerHTML = grandTotal.toFixed(2);
+            }
+
+        document.getElementById('hideTable').classList.remove('hideBtn');
+        }
+
+    document.getElementById('hideTable').onclick = function(){
+        let remove = document.getElementById('tableVisibility');
+        remove.classList.add('hideTable');
+        let tbl = document.getElementById('dataTable');
+        tbl.innerHTML = "";
+        document.getElementById('hideTable').classList.add('hideBtn');
+    }
+}
+    
+</script> 
+</head>
+
+<body>
+    <div class="container">
+        <h1>Items Purchased</h1>
+        <button type="button" id="button" class="btn">Show Table</button>
+        <div id='tableVisibility' class='hideTable'>
+            <table id="dataTable" class="table table-bordered table-striped"></table>
+        </div>
+        <button id='hideTable' class="btn hideBtn">Hide Table</button>
+    </div>
+</body>
+
+</html>
