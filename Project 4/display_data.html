@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Courtney Burch CIT 140 Project 4, OCT 26 2021 -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +12,15 @@
 
 <style>
     .hideTable{
-        display: none;
+        visibility: hidden; 
     }
     .hideBtn{
-        display: none;
+        visibility: hidden; 
     }
 </style>
 
 <script>
+    //data array
      const items = [   		
           {item: 'boogie board', cost: 15.99, quantity: 3},   		
           {item: 'shark-tooth necklace', cost: 10.99, quantity: 1},   		
@@ -29,12 +31,13 @@
        ]; 
 
     window.onload = function(){
-        
-       document.getElementById('button').onclick = function(){
-            document.getElementById('tableVisibility').classList.remove('hideTable');
+    
+       document.getElementById('showTable').onclick = function(){ //function to show the table when the Show table button is clicked
+
+            document.getElementById('tableVisibility').classList.remove('hideTable'); //make the div containing the table visible
    
-            let tbl = document.getElementById('dataTable');
-            let heading = tbl.insertRow(-1);
+            let tbl = document.getElementById('dataTable'); 
+            let heading = tbl.insertRow(-1); //insert heading row
             heading.style.fontWeight =  'bold';
             heading.insertCell().innerHTML = "Item";
             heading.insertCell().innerHTML = "Cost";
@@ -43,13 +46,13 @@
             heading.insertCell().innerHTML = "Grand Total";
 
 
-            let grandTotal = 0;
+            let grandTotal = 0; //initialize grand total
         
            for(let i=0; i<items.length; i++){
             let subtotal = 0;
-            subtotal += items[i].cost * items[i].quantity;
-            grandTotal += subtotal;
-            let row = tbl.insertRow(-1);
+            subtotal += items[i].cost * items[i].quantity; //add subtotal for each item
+            grandTotal += subtotal; //add subtotal to Grand total
+            let row = tbl.insertRow(-1); //insert row for each item in array
             row.insertCell().innerHTML = items[i].item;
             row.insertCell().innerHTML = items[i].cost;
             row.insertCell().innerHTML = items[i].quantity;
@@ -57,15 +60,17 @@
             row.insertCell().innerHTML = grandTotal.toFixed(2);
             }
 
-        document.getElementById('hideTable').classList.remove('hideBtn');
+        document.getElementById('hideTable').classList.remove('hideBtn'); //Display the Hide Table Button after the table is visible
+        document.getElementById('showTable').classList.add('hideBtn'); //hide the Show Table Button after the table is visible
         }
 
-    document.getElementById('hideTable').onclick = function(){
-        let remove = document.getElementById('tableVisibility');
-        remove.classList.add('hideTable');
-        let tbl = document.getElementById('dataTable');
-        tbl.innerHTML = "";
-        document.getElementById('hideTable').classList.add('hideBtn');
+    document.getElementById('hideTable').onclick = function(){ //function to hide the table when the Hide Table Button is clicked
+        let remove = document.getElementById('tableVisibility'); 
+        remove.classList.add('hideTable'); //add the 'hide table' class to the div containing the table
+        let tbl = document.getElementById('dataTable'); 
+        tbl.innerHTML = ""; //delete the table contents so that if Show table is clicked again the contents will not be duplicated
+        document.getElementById('hideTable').classList.add('hideBtn'); //hide the Hide Table Button after the table has been clicked
+        document.getElementById('showTable').classList.remove('hideBtn'); //display the Show Table Button so that the table can be shown again
     }
 }
     
@@ -75,7 +80,7 @@
 <body>
     <div class="container">
         <h1>Items Purchased</h1>
-        <button type="button" id="button" class="btn">Show Table</button>
+        <button type="button" id="showTable" class="btn">Show Table</button>
         <div id='tableVisibility' class='hideTable'>
             <table id="dataTable" class="table table-bordered table-striped"></table>
         </div>
